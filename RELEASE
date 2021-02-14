@@ -1,0 +1,20 @@
+
+### Chartix
+@   gui_lib         v0.00
+-------------------------------------------------------------------------------
+NOTE:
+    Allocating memory for GUI structures. And filling these structures with 
+    data.
+
+ADD:
+    include/*               (u) all
+    src/*                   (u) all
+    build/                  (u) all
+    test/                   (u) all
+    Makefile                (u) all
+
+-------------------------------------------------------------------------------
+
+@   game            -
+NOTE:
+    -
