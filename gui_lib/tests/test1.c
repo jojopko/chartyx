@@ -27,8 +27,13 @@ int main(){
     SDL_RenderClear(gui_render);
     SDL_RenderPresent(gui_render);
 
-    el1 = GUI_CreateContainer(0b11001000, b1, tex1);
+    el1 = GUI_CreateContainer(0b00000001, b1, tex1);
     f(el1);
+
+    int r = 0;
+    fprintf(stdout, "[i] (%d)\n", GUI_HasState(el1, 0b10000000));
+    fprintf(stdout, "[i] (%d)\n", GUI_HasState(el1, 0b00000001));
+    fprintf(stdout, "[i] (%d)\n", GUI_HasState(el1, 0b00001000));
 
     el2 = GUI_CreateButton(0, b2, tex2, &hello);
     f(el2);

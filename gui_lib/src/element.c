@@ -109,3 +109,42 @@ GUI_Element *GUI_CreateLabel(int states, Uint16 *text, TTF_Font *font,
 
     return element;
 }
+
+int GUI_HasState(GUI_Element *e, int state){
+    int states = 0;
+    if(e->type == GUI_ELEMENT_TYPE_CONTAINER){
+        if(state >= GUI_CONTAINER_STATES_LIMIT){
+            return 0;
+        }
+        states = e->element.container.states;
+    }
+    else if(e->type == GUI_ELEMENT_TYPE_BUTTON){
+        if(state >= GUI_BUTTON_STATES_LIMIT){
+            return 0;
+        }
+        states = e->element.button.states;
+    }
+    else if(e->type == GUI_ELEMENT_TYPE_LABEL){
+        if(state >= GUI_LABEL_STATES_LIMIT){
+            return 0;
+        }
+        states = e->element.label.states;
+    }
+    else{
+        return 0;
+    }
+
+/* Defining state using XOR . Example: 
+    states = 0b00010001 (17); 
+    state =  0b00001000(8);
+    
+    states > (states ^ state)  # 17 > 25   - false.
+*/
+
+    if(states > (states ^ state)){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}

@@ -1,17 +1,13 @@
 
 ### Chartix
-@   gui_lib         v0.00
+@   gui_lib         v0.01
 -------------------------------------------------------------------------------
 NOTE:
-    Allocating memory for GUI structures. And filling these structures with 
-    data.
+    Add few function; 
 
 ADD:
-    include/*               (u) all
-    src/*                   (u) all
-    build/                  (u) all
-    test/                   (u) all
-    Makefile                (u) all
+    GUI_HasState()
+
 
 -------------------------------------------------------------------------------
 

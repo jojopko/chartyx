@@ -29,13 +29,27 @@ struct GUI_Element{
 };
 typedef struct GUI_Element GUI_Element;
 
+/*
+ * # laziness
+ */
 extern GUI_Element *GUI_CreateContainer(int states, SDL_Rect box,
                                         SDL_Texture *texture);
 
+/*
+ * # laziness
+ */
 extern GUI_Element *GUI_CreateButton(int states, SDL_Rect box,
                                      SDL_Texture *texture, void *func);
 
+/*
+ * # laziness
+ */
 extern GUI_Element *GUI_CreateLabel(int states, Uint16 *text, TTF_Font *font,
                                      SDL_Color fg, SDL_Rect box);
+
+/*
+ * # laziness
+ */
+extern int GUI_HasState(GUI_Element *e, int state);
 
 #endif
