@@ -1,11 +1,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
-#include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_video.h>
 #include <stdio.h>
 #include "../include/gui.h"
+#include <SDL2/SDL_image.h>
 
 void f(GUI_Element *e);
 void hello(void *date);
@@ -13,24 +10,44 @@ void hello(void *date);
 int main(){
     SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
+    IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
     GUI_Element *el1, *el2, *el3;
     SDL_Texture *tex1   = (void*)1,
-                *tex2   = (void*)1, 
-                *tex3   = (void*)1;
-    SDL_Rect     b1     = {0,0,10,10},
+                *tex2   = (void*)1;
+    SDL_Rect     b1     = {0,0,512,512},
                  b2     = {0,0,10,10},
                  b3     = {0,0,10,10};
 
-    SDL_Window *win = SDL_CreateWindow("", 0, 0, 512, 512, 0);
+
+    SDL_Window *win = SDL_CreateWindow("test1\0", 0, 0, 512, 512, 0);
     gui_render = SDL_CreateRenderer(win, 0, SDL_RENDERER_ACCELERATED);
     SDL_SetRenderDrawColor(gui_render, 255, 255, 255, 255);
     SDL_RenderClear(gui_render);
     SDL_RenderPresent(gui_render);
 
+    SDL_Surface *img = IMG_Load("/home/jojopko/Documents/chartyx/gui_lib/tests/"
+                                "assets_for_test/test1-container.png\0");
+    SDL_Surface *img2= IMG_Load("/home/jojopko/Documents/chartyx/gui_lib/tests/"
+                                "assets_for_test/test1-container2.jpg\0");
     el1 = GUI_CreateContainer(0b00000001, b1, tex1);
+
+    GUI_UpdateElementTexture(el1, img);
+    f(el1);
+    
+    GUI_PresentElement(el1);
+    SDL_RenderPresent(gui_render);
+
+    SDL_Delay(2000);
+
+    GUI_UpdateElementTexture(el1, img2);
     f(el1);
 
-    int r = 0;
+    SDL_RenderClear(gui_render);
+    GUI_PresentElement(el1);
+    SDL_RenderPresent(gui_render);
+
+    SDL_Delay(2000);
+
     fprintf(stdout, "[i] (%d)\n", GUI_HasState(el1, 0b10000000));
     fprintf(stdout, "[i] (%d)\n", GUI_HasState(el1, 0b00000001));
     fprintf(stdout, "[i] (%d)\n", GUI_HasState(el1, 0b00001000));
@@ -39,17 +56,19 @@ int main(){
     f(el2);
 
     Uint16 text[] = {'h','e','l','l',0x41E,' ',0x41C,0x438,'p','!',0};
-    TTF_Font *font = TTF_OpenFont("/home/jojopko/.local/share/fonts/19888.ttf\0", 16);
+    TTF_Font *font = TTF_OpenFont("/home/jojopko/Documents/chartyx/gui_lib/tests/"
+                                  "assets_for_test/test1-font.ttf\0", 16);
     if(!font){
         fprintf(stdout, "[!] font empty! %s\n", TTF_GetError());
     }
-
     SDL_Color fg = {0,0,0};
 
     el3 = GUI_CreateLabel(0, (Uint16*)text, font, fg, b3);
     f(el3);
 
-    SDL_RenderCopy(gui_render, el3->element.label.texture, NULL, &el3->element.label.box);
+    SDL_RenderClear(gui_render);
+    GUI_PresentElement(el3);
+    // SDL_RenderCopy(gui_render, el3->element.label.texture, NULL, &el3->element.label.box);
     SDL_RenderPresent(gui_render);
 
     SDL_Delay(5000);

@@ -1,13 +1,15 @@
 
 ### Chartix
-@   gui_lib         v0.01
+@   gui_lib         v0.02
 -------------------------------------------------------------------------------
 NOTE:
-    Add few function; 
+    You can already use it! The test most likely does not work for you, 
+    you need to set the paths manually in it.
 
 ADD:
-    GUI_HasState()
-
+    GUI_UpdateElementTexture
+    GUI_IsElementBox
+    GUI_PresentElement
 
 -------------------------------------------------------------------------------
 

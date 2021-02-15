@@ -17,7 +17,7 @@ test: $(BD)/test1 $(BD)/libgui.a
 all: $(BD)/libgui.a
 
 $(BD)/test1: tests/test1.c
-	$(CC) $(CF) $(LN) $< -o $@ -L./build -l:libgui.a
+	$(CC) $(CF) $(LN) -lSDL2_image $< -o $@ -L./build -l:libgui.a
 
 $(BD)/libgui.a: $(OM)
 	ar r $@ $(OM)

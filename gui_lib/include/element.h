@@ -52,4 +52,19 @@ extern GUI_Element *GUI_CreateLabel(int states, Uint16 *text, TTF_Font *font,
  */
 extern int GUI_HasState(GUI_Element *e, int state);
 
+/*
+ * # laziness
+ */
+extern int GUI_UpdateElementTexture(GUI_Element *e, SDL_Surface *surf);
+
+/*
+ * # laziness
+ */
+extern int GUI_IsElementBox(GUI_Element *e, int Xpos, int Ypos);
+
+/*
+ * # laziness // rename
+ */
+extern int GUI_PresentElement(GUI_Element *e);
+
 #endif

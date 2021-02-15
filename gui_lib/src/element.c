@@ -101,6 +101,7 @@ GUI_Element *GUI_CreateLabel(int states, Uint16 *text, TTF_Font *font,
 
     if(!lsurf){
         free(element);
+        free(lsurf);
         return NULL;
     }
     label.texture = SDL_CreateTextureFromSurface(gui_render, lsurf);
@@ -134,12 +135,13 @@ int GUI_HasState(GUI_Element *e, int state){
         return 0;
     }
 
-/* Defining state using XOR . Example: 
+    /* dev-NOTE: AND method is better */
+    /* Defining state using XOR . Example: 
     states = 0b00010001 (17); 
-    state =  0b00001000(8);
+    state =  0b00001000 (8);
     
     states > (states ^ state)  # 17 > 25   - false.
-*/
+    */
 
     if(states > (states ^ state)){
         return 1;
@@ -147,4 +149,119 @@ int GUI_HasState(GUI_Element *e, int state){
     else{
         return 0;
     }
+}
+
+int GUI_IsElementBox(GUI_Element *e, int Xpos, int Ypos){
+    int w0, w1;
+    int h0, h1;
+    int is_element_box = 0;
+    if(e->type == GUI_ELEMENT_TYPE_CONTAINER){
+        w0 = e->element.container.box.x;
+        w1 = e->element.container.box.w + w0;
+        h0 = e->element.container.box.y;
+        h1 = e->element.container.box.h + h0;
+    }
+    else if(e->type == GUI_ELEMENT_TYPE_BUTTON){
+        w0 = e->element.button.box.x;
+        w1 = e->element.button.box.w + w0;
+        h0 = e->element.button.box.y;
+        h1 = e->element.button.box.h + h0;
+    }
+    else if(e->type == GUI_ELEMENT_TYPE_LABEL){
+        w0 = e->element.label.box.x;
+        w1 = e->element.label.box.w + w0;
+        h0 = e->element.label.box.y;
+        h1 = e->element.label.box.h + h0;
+    }
+    else{
+        return is_element_box;
+    }
+
+    if(Xpos <= w1 && Xpos >= w0){
+        if(Ypos <= h1 && Ypos >= h0){
+            is_element_box = 1;
+        }
+    }
+    else{
+        is_element_box = 0;
+    }
+    return is_element_box;
+}
+
+int GUI_UpdateElementTexture(GUI_Element *e, SDL_Surface *surf){
+    if(e->type == GUI_ELEMENT_TYPE_LABEL){
+        SDL_Surface *lsurf;
+        SDL_Texture *texture;
+
+        TTF_Font *font = e->element.label.font;
+        Uint16 *text = e->element.label.text;
+        SDL_Color fg = e->element.label.fg;
+        lsurf = TTF_RenderUNICODE_Solid(font, text, fg);
+
+        if(!lsurf){
+            free(lsurf);
+            return -1;
+        }
+
+        texture = SDL_CreateTextureFromSurface(gui_render, lsurf);
+        if(!texture){
+            SDL_DestroyTexture(texture);
+            return -1;
+        }
+        else{
+            e->element.label.texture = texture;
+        }
+    }
+    else if(e->type == GUI_ELEMENT_TYPE_CONTAINER){
+        SDL_Texture *texture;
+        texture = SDL_CreateTextureFromSurface(gui_render, surf);
+        if(!texture){
+            SDL_DestroyTexture(texture);
+            return -1;
+        }
+        else{
+            e->element.container.texture = texture;
+        }
+    }
+    else if(e->type == GUI_ELEMENT_TYPE_BUTTON){
+        /* Someday it needs to be improved */
+        SDL_Texture *texture;
+        texture = SDL_CreateTextureFromSurface(gui_render, surf);
+        if(!texture){
+            SDL_DestroyTexture(texture);
+            return -1;
+        }
+        else{
+            e->element.button.texture = texture;
+        }
+    }
+
+    return 0;
+}
+
+int GUI_PresentElement(GUI_Element *e){
+    /* !Add states support! */
+    SDL_Texture *texture;
+    SDL_Rect dst;
+    if(e->type == GUI_ELEMENT_TYPE_CONTAINER){
+        dst = e->element.container.box;
+        texture = e->element.container.texture;
+    }
+    else if(e->type == GUI_ELEMENT_TYPE_BUTTON){
+        dst = e->element.button.box;
+        texture = e->element.button.texture;
+    }
+    else if(e->type == GUI_ELEMENT_TYPE_LABEL){
+        dst = e->element.label.box;
+        texture = e->element.label.texture;
+    }
+    else{
+        return -1;
+    }
+
+    if(SDL_RenderCopy(gui_render, texture, NULL, &dst)){
+        return -1;
+    }
+
+    return 0;
 }
