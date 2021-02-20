@@ -1,0 +1,134 @@
+HEIGTH-map
+    0 -1000m    /* Water. Deep ocean        */
+    1 -500m     /* Water. Meer              */
+    2 -50m      /* Water. Shallow           */
+    3  0m       /* Earth. Coast             */
+    4  100m     /* Earth. Plain             */
+    5  300m     /* Earth. Elevation         */
+    6  400m     /* Earth. Small hills       */
+    7  600m     /* Earth. Hills             */
+    8  1000m    /* Earth. Mountains         */
+
+TEMP-map  t     water       r g b
+    0 -20 C     /* FREEZE. #000000 */
+    1 -15 C     /* FREEZE. #1b1b1b */
+    2 -10 C     /* NORMAL. #303030 */
+    3 -5  C     /* NORMAL. #474747 */
+    4  0  C     /* NORMAL. #5e5e5e */
+    5  5  C     /* NORMAL. #777777 */
+    6  10 C     /* NORMAL. #919191 */
+    7  15 C     /* NORMAL. #ababab */
+    8  20 C     /* HEAT.   #c6c6c6 */
+    9  25 C     /* HEAT.   #e2e2e2 */
+    10 30 C     /* HEAT.   #ffffff */
+
+WATER-VAPOR-map
+    0   10%
+    1   20%
+    2   40%
+    3   50%
+    4   70%
+    5   90%
+
+BIOM tabel
+    # vapor->temp->heigth ==> biom
+    .   ._______ _______________._______________._______________._______________._______________._______________._______________._______________._______________.
+        |#######|heigth#########|###############|###############|###############|###############|###############|###############|###############|###############|
+        |temp   |-1000m         |-500m          |-50m           | 0m            | 100m          | 300m          | 400m          | 600m          | 1000m         |
+        |#######|###############|###############|###############|###############|###############|###############|###############|###############|###############|
+    10%:|-20C   | ocean         | ice           | ice           | snow          | snow          | snow          | snow          | hills-snow    | mountains-snow|
+        |-15C   | ocean         | meer          | ice           | snow          | snow          | tundra        | tundra        | hills-snow    | mountains-snow|
+        |-10C   | ocean         | meer          | ice           | snow          | tundra        | tundra        | tundra        | hills         | mountains-snow|
+        |-5 C   | ocean         | meer          | shallow       | tundra        | tundra        | tundra        | tundra        | hills         | mountains-snow|
+        | 0 C   | ocean         | meer          | shallow       | sand          | sand          | sand          | tundra        | hills-sand    | mountains     |
+        | 5 C   | ocean         | meer          | shallow       | sand          | sand          | sand          | sand          | hills-sand    | mountains     |
+        | 10C   | ocean         | meer          | shallow       | sand          | sand          | sand          | sand          | hills-sand    | mountains     |
+        | 15C   | ocean         | meer          | shallow       | sand          | sand          | sand          | sand          | hills-sand    | mountains     |
+        | 20C   | ocean         | meer          | shallow       | sand          | sand          | sand          | sand          | hills-sand    | mountains     |
+        | 25C   | ocean         | meer          | shallow       | sand          | sand          | sand          | sand          | hills-sand    | mountains     |
+        | 30C   | ocean         | meer          | shallow       | sand          | sand          | sand          | sand          | hills-sand    | mountains     |
+        |#######|###############|###############|###############|###############|###############|###############|###############|###############|###############|
+    20%:|-20C   | ocean         | ice           | ice           | snow          | snow          | snow          | tundra        | hills-snow    | mountains-snow|
+        |-15C   | ocean         | meer          | ice           | snow          | snow          | tundra        | tundra        | hills-snow    | mountains-snow|
+        |-10C   | ocean         | meer          | ice           | snow          | taiga         | taiga         | taiga         | hills         | mountains-snow|
+        |-5 C   | ocean         | meer          | shallow       | sand          | taiga         | taiga         | taiga         | hills         | mountains-snow|
+        | 0 C   | ocean         | meer          | shallow       | sand          | steppe        | steppe        | taiga         | hills         | mountains     |
+        | 5 C   | ocean         | meer          | shallow       | sand          | steppe        | steppe        | steppe        | hills         | mountains     |
+        |10 C   | ocean         | meer          | shallow       | sand          | steppe        | steppe        | steppe        | hills         | mountains     |
+        |15 C   | ocean         | meer          | shallow       | sand          | sand          | steppe        | steppe        | hills         | mountains     |
+        |20 C   | ocean         | meer          | shallow       | sand          | sand          | sand          | steppe        | hills         | mountains     |
+        |25 C   | ocean         | meer          | shallow       | sand          | sand          | sand          | sand          | hills         | mountains     |
+        |30 C   | ocean         | meer          | shallow       | sand          | sand          | sand          | sand          | hills-sand    | mountains     |
+        |#######|###############|###############|###############|###############|###############|###############|###############|###############|###############|
+    40%:|-20C   | ocean         | ice           | ice           | snow          | snow          | snow          | snow          | hills-snow    | mountains-snow|
+        |-15C   | ocean         | meer          | ice           | snow          | tundra        | tundra        | taiga         | hills         | mountains-snow|
+        |-10C   | ocean         | meer          | ice           | snow          | tundra        | taiga         | taiga         | hills         | mountains-snow|
+        |-5 C   | ocean         | meer          | shallow       | dirt          | forest        | taiga         | taiga         | hills         | mountains-snow|
+        | 0 C   | ocean         | meer          | shallow       | dirt          | forest        | forest        | forest        | hills         | mountains     |
+        | 5 C   | ocean         | meer          | shallow       | dirt          | dirt          | forest        | forest        | hills-dirt    | mountains     |
+        |10 C   | ocean         | meer          | shallow       | dirt          | dirt          | dirt          | forest        | hills-dirt    | mountains     |
+        |15 C   | ocean         | meer          | shallow       | dirt          | dirt          | dirt          | dirt          | hills-dirt    | mountains     |
+        |20 C   | ocean         | meer          | shallow       | dirt          | steppe        | steppe        | steppe        | hills         | mountains     |
+        |25 C   | ocean         | meer          | shallow       | sand          | sand          | steppe        | steppe        | hills         | mountains     |
+        |30 C   | ocean         | meer          | shallow       | sand          | sand          | sand          | steppe        | hills         | mountains     |
+        |#######|###############|###############|###############|###############|###############|###############|###############|###############|###############|
+    50%:|-20C   | ocean         | ice           | ice           | snow          | snow          | tundra        | tundra        | hills-snow    | mountains-snow|
+        |-15C   | ocean         | meer          | ice           | snow          | taiga         | taiga         | tundra        | hills-snow    | mountains-snow|
+        |-10C   | ocean         | meer          | shallow       | taiga         | taiga         | taiga         | taiga         | hills         | mountains-snow|          
+        |-5 C   | ocean         | meer          | shallow       | forest        | forest        | taiga         | taiga         | hills         | mountains-snow|
+        | 0 C   | ocean         | meer          | shallow       | dirt          | dirt          | forest        | forest        | hills-dirt    | mountains-snow|
+        | 5 C   | ocean         | meer          | shallow       | dirt          | dirt          | dirt          | forest        | hills-dirt    | mountains     |
+        |10 C   | ocean         | meer          | shallow       | dirt          | dirt          | dirt          | forest        | hills-dirt    | mountains     |
+        |15 C   | ocean         | meer          | shallow       | dirt          | dirt          | dirt          | forest        | hills-dirt    | mountains     |
+        |20 C   | ocean         | meer          | shallow       | dirt          | dirt          | forest        | forest        | hills-dirt    | mountains     |
+        |25 C   | ocean         | meer          | shallow       | dirt          | dirt          | jungle        | jungle        | hills-jungle  | mountains     |     
+        |30 C   | ocean         | meer          | shallow       | dirt          | jungle        | jungle        | jungle        | hills-jungle  | mountains     |
+        |#######|###############|###############|###############|###############|###############|###############|###############|###############|###############|
+    70%:|-20C   | ocean         | ice           | ice           | snow          | tundra        | tundra        | tundra        | hills-snow    | mountains-snow|
+        |-15C   | ocean         | meer          | ice           | tundra        | tundra        | tundra        | tundra        | hills-snow    | mountains-snow|
+        |-10C   | ocean         | meer          | shallow       | taiga         | taiga         | taiga         | tundra        | hills         | mountains-snow|
+        |-5 C   | ocean         | meer          | shallow       | forest        | forest        | taiga         | taiga         | hills         | mountains-snow|
+        | 0 C   | ocean         | meer          | shallow       | dirt          | forest        | forest        | forest        | hills-dirt    | mountains-snow|
+        | 5 C   | ocean         | meer          | shallow       | dirt          | dirt          | forest        | forest        | hills-dirt    | mountains     |
+        |10 C   | ocean         | meer          | shallow       | swamp         | dirt          | dirt          | forest        | hills-dirt    | mountains     |
+        |15 C   | ocean         | meer          | shallow       | swamp         | dirt          | dirt          | dirt          | hills-dirt    | mountains     |
+        |20 C   | ocean         | meer          | shallow       | swamp         | dirt          | jungle        | jungle        | hills-jungle  | mountains     |
+        |25 C   | ocean         | meer          | shallow       | swamp         | jungle        | jungle        | jungle        | hills-jungle  | mountains     |
+        |30 C   | ocean         | meer          | shallow       | jungle        | jungle        | jungle        | jungle        | hills-jungle  | mountains     |
+        |#######|###############|###############|###############|###############|###############|###############|###############|###############|###############|
+   100%:|-20C   | ocean         | ice           | ice           | snow          | tundra        | tundra        | tundra        | hills-snow    | mountains-snow|
+        |-15C   | ocean         | meer          | ice           | taiga         | taiga         | tundra        | tundra        | hills-snow    | mountains-snow|
+        |-10C   | ocean         | meer          | shallow       | forest        | forest        | taiga         | taiga         | hills         | mountains-snow|
+        |-5 C   | ocean         | meer          | shallow       | dirt          | forest        | forest        | forest        | hills-dirt    | mountains-snow|
+        | 0 C   | ocean         | meer          | shallow       | dirt          | forest        | forest        | forest        | hills-dirt    | mountains-snow|
+        | 5 C   | ocean         | meer          | shallow       | swamp         | dirt          | dirt          | forest        | hills-dirt    | mountains     |
+        |10 C   | ocean         | meer          | shallow       | swamp         | dirt          | forest        | forest        | hills-dirt    | mountains     |
+        |15 C   | ocean         | meer          | shallow       | swamp         | dirt          | jungle        | jungle        | hills-jungle  | mountains     |
+        |20 C   | ocean         | meer          | shallow       | jungle        | jungle        | dirt          | dirt          | hills-dirt    | mountains     |
+        |25 C   | ocean         | meer          | shallow       | jungle        | jungle        | jungle        | dirt          | hills-jungle  | mountains     |
+        |30 C   | ocean         | meer          | shallow       | jungle        | jungle        | jungle        | jungle        | hills-jungle  | mountains     |
+        |#######|###############|###############|###############|###############|###############|###############|###############|###############|###############|
+
+        TYPEs:
+            ocean,              +
+            merr,               +
+            shallow,            +
+            ice,                +
+            
+            snow,               +
+            tundra,             +
+            sand,               +
+            dirt,               +
+            swamp,              +
+            forest,             +
+            taiga,              +
+            jungle,             +
+            steppe,             +
+            
+            hills,              +
+            hills-jungle,       +
+            hills-dirt,         +
+            hills-snow,         +
+
+            mountains,
+            mountains-snow
