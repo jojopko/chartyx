@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <stdlib.h>
 #include "../include/element.h"
 #include "../include/gui.h"
 
@@ -135,7 +136,7 @@ int GUI_HasState(GUI_Element *e, int state){
         return 0;
     }
 
-    /* dev-NOTE: AND method is better */
+    /* FIXME: AND method is better */
     /* Defining state using XOR . Example: 
     states = 0b00010001 (17); 
     state =  0b00001000 (8);
@@ -240,7 +241,7 @@ int GUI_UpdateElementTexture(GUI_Element *e, SDL_Surface *surf){
 }
 
 int GUI_PresentElement(GUI_Element *e){
-    /* !Add states support! */
+    /* FIXME: !Add states support! */
     SDL_Texture *texture;
     SDL_Rect dst;
     if(e->type == GUI_ELEMENT_TYPE_CONTAINER){

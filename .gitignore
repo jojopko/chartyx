@@ -1,6 +1,7 @@
 gui_lib/build/*
 gui_lib/build/test1
 TODO
+assets/__never
 
 *.o
 *.a

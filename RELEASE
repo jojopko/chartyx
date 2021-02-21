@@ -1,15 +1,15 @@
 
 ### Chartix
-@   gui_lib         v0.02
+@   gui_lib         v0.03
 -------------------------------------------------------------------------------
 NOTE:
-    You can already use it! The test most likely does not work for you, 
-    you need to set the paths manually in it.
+    Add layers.
 
 ADD:
-    GUI_UpdateElementTexture
-    GUI_IsElementBox
-    GUI_PresentElement
+    struct GUI_Layers
+    GUI_CreateLayer()
+    GUI_PushElementTo()
+    GUI_RemoveElementTo()
 
 -------------------------------------------------------------------------------
 

@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "element.h"
+#include "layer.h"
 #include <SDL2/SDL.h>
 
 extern SDL_Renderer *gui_render;
