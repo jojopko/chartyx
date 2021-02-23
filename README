@@ -1,1 +1,6 @@
-SDL2: min: SDL2-2.0.14
+#This project is not ready.
+
+# Library:
+    SDL2 (v2.0.14)
+    SDL2_image
+    SDL2_ttf

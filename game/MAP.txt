@@ -12,7 +12,7 @@ HEIGTH-map
 TEMP-map  t     water       r g b
     0 -20 C     /* FREEZE. #000000 */
     1 -15 C     /* FREEZE. #1b1b1b */
-    2 -10 C     /* NORMAL. #303030 */
+    2 -10 C     /* FREEZE. #303030 */
     3 -5  C     /* NORMAL. #474747 */
     4  0  C     /* NORMAL. #5e5e5e */
     5  5  C     /* NORMAL. #777777 */

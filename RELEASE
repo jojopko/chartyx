@@ -1,18 +1,13 @@
+# ./RELEASE
+# chartix release list
 
-### Chartix
-@   gui_lib         v0.03
--------------------------------------------------------------------------------
-NOTE:
-    Add layers.
+--------------------------------------------------------------------------------
+@ gui_lib (v0.04)
+~ Layers don't work. In the future they will definitely be.
 
-ADD:
-    struct GUI_Layers
-    GUI_CreateLayer()
-    GUI_PushElementTo()
-    GUI_RemoveElementTo()
+> Delete Layers;
+> Fix `stack overflow`. Possibly (=_=)
 
--------------------------------------------------------------------------------
-
-@   game            -
-NOTE:
-    -
+--------------------------------------------------------------------------------
+@ game (nil)
+--------------------------------------------------------------------------------

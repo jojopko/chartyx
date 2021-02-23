@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_timer.h>
 #include <stdio.h>
 #include "../include/gui.h"
 #include <SDL2/SDL_image.h>
@@ -22,7 +23,6 @@ int main(){
     SDL_Window *win = SDL_CreateWindow("test1\0", 0, 0, 512, 512, 0);
     gui_render = SDL_CreateRenderer(win, 0, SDL_RENDERER_ACCELERATED);
     SDL_SetRenderDrawColor(gui_render, 255, 255, 255, 255);
-    SDL_RenderClear(gui_render);
     SDL_RenderPresent(gui_render);
 
     SDL_Surface *img = IMG_Load("/home/jojopko/Documents/chartyx/gui_lib/tests/"
@@ -36,23 +36,25 @@ int main(){
     
     GUI_PresentElement(el1);
     SDL_RenderPresent(gui_render);
+    SDL_RenderClear(gui_render);
 
-    SDL_Delay(2000);
+    SDL_Delay(1000);
 
     GUI_UpdateElementTexture(el1, img2);
     f(el1);
 
-    SDL_RenderClear(gui_render);
     GUI_PresentElement(el1);
     SDL_RenderPresent(gui_render);
+    SDL_RenderClear(gui_render);
 
-    SDL_Delay(2000);
+    SDL_Delay(1000);
 
     fprintf(stdout, "[i] (%d)\n", GUI_HasState(el1, 0b10000000));
     fprintf(stdout, "[i] (%d)\n", GUI_HasState(el1, 0b00000001));
     fprintf(stdout, "[i] (%d)\n", GUI_HasState(el1, 0b00001000));
 
     el2 = GUI_CreateButton(0, b2, tex2, &hello);
+    GUI_UpdateElementTexture(el2, img);
     f(el2);
 
     Uint16 text[] = {'h','e','l','l',0x41E,' ',0x41C,0x438,'p','!',0};
@@ -66,12 +68,43 @@ int main(){
     el3 = GUI_CreateLabel(0, (Uint16*)text, font, fg, b3);
     f(el3);
 
-    SDL_RenderClear(gui_render);
     GUI_PresentElement(el3);
-    // SDL_RenderCopy(gui_render, el3->element.label.texture, NULL, &el3->element.label.box);
     SDL_RenderPresent(gui_render);
 
-    SDL_Delay(5000);
+    SDL_Delay(1000);
+
+    SDL_SetRenderDrawColor(gui_render, 255, 255, 255, 255);
+    SDL_RenderFillRect(gui_render, NULL);
+    SDL_RenderPresent(gui_render);
+    SDL_RenderClear(gui_render);
+
+    SDL_Delay(1000);
+#if 0 
+    /* Потом реализую */
+    GUI_Layer *layer;
+    layer = GUI_CreateLayer(0, NULL, 0);
+
+    if(GUI_PushElementTo(el1, layer)){
+        fprintf(stdout, "[!] layer: push fail!\n");
+    }
+    fprintf(stdout, "[i] layer: 1 - Ok.\n");
+    if(GUI_PushElementTo(el2, layer)){
+        fprintf(stdout, "[!] layer: push fail!\n");
+    }
+    fprintf(stdout, "[i] layer: 2 - Ok.\n");
+    if(GUI_PushElementTo(el3, layer)){
+        fprintf(stdout, "[!] layer: push fail!\n");
+    }
+    fprintf(stdout, "[i] layer: 3 - Ok.\n");
+    fprintf(stdout, "[i] layer: elements: " "1type:%d 2type:%d 3type:%d\n",
+            (layer->elements)->type, (layer->elements+1)->type, (layer->elements+2)->type);
+
+    GUI_PresentLayer(layer);
+    fprintf(stdout, "[i] LayerPresent - Ok!\n");
+    SDL_RenderPresent(gui_render);
+    fprintf(stdout, "[i] RenderPresent - Ok!\n");
+#endif
+
     return 0;
 }
 

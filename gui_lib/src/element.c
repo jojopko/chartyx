@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_ttf.h>
 #include <stdlib.h>
 #include "../include/element.h"
@@ -210,6 +211,9 @@ int GUI_UpdateElementTexture(GUI_Element *e, SDL_Surface *surf){
             return -1;
         }
         else{
+            // if(e->element.label.texture){
+            //     free(e->element.label.texture);
+            // }
             e->element.label.texture = texture;
         }
     }
@@ -221,6 +225,9 @@ int GUI_UpdateElementTexture(GUI_Element *e, SDL_Surface *surf){
             return -1;
         }
         else{
+            // if(e->element.container.texture){
+            //     free(e->element.container.texture);
+            // }
             e->element.container.texture = texture;
         }
     }
@@ -233,6 +240,9 @@ int GUI_UpdateElementTexture(GUI_Element *e, SDL_Surface *surf){
             return -1;
         }
         else{
+            // if(e->element.button.texture){
+            //     free(e->element.button.texture);
+            // }
             e->element.button.texture = texture;
         }
     }
@@ -261,8 +271,10 @@ int GUI_PresentElement(GUI_Element *e){
     }
 
     if(SDL_RenderCopy(gui_render, texture, NULL, &dst)){
+        SDL_DestroyTexture(texture);
         return -1;
     }
 
+    SDL_DestroyTexture(texture);
     return 0;
 }
