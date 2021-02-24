@@ -32,6 +32,8 @@ GUI_Element *GUI_CreateContainer(int states, SDL_Rect box, SDL_Texture *texture)
 
     element->element.container = cont;
 
+    element->next = NULL;
+
     return element;
 }
 
@@ -59,6 +61,8 @@ GUI_Element *GUI_CreateButton(int states, SDL_Rect box, SDL_Texture *texture, vo
     button.func = func;
 
     element->element.button = button;
+
+    element->next = NULL;
 
     return element;
 }
@@ -109,6 +113,8 @@ GUI_Element *GUI_CreateLabel(int states, Uint16 *text, TTF_Font *font,
     label.texture = SDL_CreateTextureFromSurface(gui_render, lsurf);
 
     element->element.label = label;
+
+    element->next = NULL;
 
     return element;
 }

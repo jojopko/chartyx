@@ -8,52 +8,67 @@
 
 static Sint layer_count = 0;
 
-// size = 0 --> all element from `els`;
-GUI_Layer *GUI_CreateLayer(int states, GUI_Element *els, int size){
+GUI_Layer *GUI_CreateLayer(int states){
     GUI_Layer *layer;
-    GUI_Element *elements;
-
     layer = (GUI_Layer *) calloc(1, sizeof(*layer));
+
     if(!layer){
-        free(layer);
         return NULL;
     }
 
-    layer->id = layer_count;
-    if(states > GUI_LAYER_STATES_LIMIT || states < 0){
-        free(layer);
+    if(states < 0 || states > GUI_LAYER_STATES_LIMIT){
         return NULL;
     }
+
     layer->states = states;
-
-    if(!els){
-        layer->count = 0;
-        layer->elements = NULL;
-    }
-
-#if 0
-    else{
-        elements = (GUI_Element *) calloc(size, sizeof(*els));
-        if(!elements){
-            free(layer);
-            return NULL;
-        }
-
-        int i = 0;
-        while(i < size || (els+i)){
-            (els+i)->lid = i;
-            *(elements+i) = *(els+i);
-            i++;
-        }
-
-        layer->count = i;
-        layer->elements = (GUI_Element*) elements;
-    }
-#endif
-
+    layer->elements = NULL;
+    layer->count = 0;
+    layer->id = layer_count;
     layer_count++;
+
     return layer;
 }
+
+int GUI_PushElement(GUI_Element *el, GUI_Layer *layer){
+    if(!layer){
+        return 1;
+    }
+
+    if(!el){
+        return 2;
+    }
+
+    if(!layer->elements){
+        layer->elements = el;
+        layer->elements->lid = 0;
+        layer->count++;
+    }
+    else{
+        GUI_Element *_element = layer->elements;
+        GUI_Element *__element;
+        int lid = 0;
+        while(lid < layer->count){
+            if(!_element->next){
+                _element->next = el;
+                __element = _element;
+
+                _element = __element->next;
+                _element->lid = lid+1;
+            }
+            else{
+                __element = _element;
+                _element = __element->next;
+            }
+            lid++;
+        }
+        layer->count++;
+    }
+
+    return 0;
+}
+
+
+#if 0
 
 int GUI_PushElementTo(GUI_Element *el, GUI_Layer *layer){
     /* FIXME: possible stack overflow!
@@ -129,3 +144,5 @@ int GUI_PresentLayer(GUI_Layer *layer){
 
     return 0;
 }
+
+#endif

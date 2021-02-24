@@ -79,31 +79,25 @@ int main(){
     SDL_RenderClear(gui_render);
 
     SDL_Delay(1000);
-#if 0 
-    /* Потом реализую */
+
     GUI_Layer *layer;
-    layer = GUI_CreateLayer(0, NULL, 0);
+    layer = GUI_CreateLayer(0);
 
-    if(GUI_PushElementTo(el1, layer)){
+    if(!layer){
+        fprintf(stdout, "[!] layer: create fail!\n");
+    }
+    if(GUI_PushElement(el1, layer)){
         fprintf(stdout, "[!] layer: push fail!\n");
     }
-    fprintf(stdout, "[i] layer: 1 - Ok.\n");
-    if(GUI_PushElementTo(el2, layer)){
-        fprintf(stdout, "[!] layer: push fail!\n");
-    }
-    fprintf(stdout, "[i] layer: 2 - Ok.\n");
-    if(GUI_PushElementTo(el3, layer)){
-        fprintf(stdout, "[!] layer: push fail!\n");
-    }
-    fprintf(stdout, "[i] layer: 3 - Ok.\n");
-    fprintf(stdout, "[i] layer: elements: " "1type:%d 2type:%d 3type:%d\n",
-            (layer->elements)->type, (layer->elements+1)->type, (layer->elements+2)->type);
 
-    GUI_PresentLayer(layer);
-    fprintf(stdout, "[i] LayerPresent - Ok!\n");
-    SDL_RenderPresent(gui_render);
-    fprintf(stdout, "[i] RenderPresent - Ok!\n");
-#endif
+    fprintf(stdout, "[i] layer: element: lid=%d\n", layer->elements->lid);
+
+    if(GUI_PushElement(el2, layer)){
+        fprintf(stdout, "[!] layer: push fail!\n");
+    }
+
+    fprintf(stdout, "[i] layer: element: lid=%d\n", layer->elements->next->lid);
+    
 
     return 0;
 }

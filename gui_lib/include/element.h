@@ -22,12 +22,15 @@ union GUI_Union_Element{
 };
 typedef union GUI_Union_Element GUI__Element;
 
+typedef struct GUI_Element GUI_Element;
+
 struct GUI_Element{
     Uchar           type;
-    GUI__Element    element;
     Sint            lid;
+    GUI__Element    element;
+    GUI_Element    *next;       /* for layer */
 };
-typedef struct GUI_Element GUI_Element;
+// typedef struct GUI_Element GUI_Element;
 
 /*
  * # laziness
