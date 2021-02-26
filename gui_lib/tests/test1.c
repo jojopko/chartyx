@@ -98,6 +98,20 @@ int main(){
 
     fprintf(stdout, "[i] layer: element: lid=%d\n", layer->elements->next->lid);
     
+    if(GUI_PushElement(el3, layer)){
+        fprintf(stdout, "[!] layer: push fail!\n");
+    }
+
+    fprintf(stdout, "[i] layer: element: lid=%d\n", layer->elements->next->lid);
+
+    if(GUI_PresentLayer(layer)){
+        fprintf(stdout, "[!] layer: present fail! {%d}\n", GUI_PresentLayer(layer));
+    }
+    
+    SDL_RenderPresent(gui_render);
+    SDL_RenderClear(gui_render);
+
+    SDL_Delay(1000);
 
     return 0;
 }

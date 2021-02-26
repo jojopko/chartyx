@@ -1,6 +1,8 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_error.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_ttf.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "../include/element.h"
 #include "../include/gui.h"
@@ -257,7 +259,7 @@ int GUI_UpdateElementTexture(GUI_Element *e, SDL_Surface *surf){
 }
 
 int GUI_PresentElement(GUI_Element *e){
-    /* FIXME: !Add states support! */
+    /* NOTE: !Add states support! */
     SDL_Texture *texture;
     SDL_Rect dst;
     if(e->type == GUI_ELEMENT_TYPE_CONTAINER){
@@ -277,10 +279,10 @@ int GUI_PresentElement(GUI_Element *e){
     }
 
     if(SDL_RenderCopy(gui_render, texture, NULL, &dst)){
-        SDL_DestroyTexture(texture);
+        fprintf(stdout, "[i] sdl: %s\n", SDL_GetError());
+        
         return -1;
     }
-
-    SDL_DestroyTexture(texture);
+    
     return 0;
 }

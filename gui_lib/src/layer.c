@@ -67,6 +67,27 @@ int GUI_PushElement(GUI_Element *el, GUI_Layer *layer){
     return 0;
 }
 
+int GUI_PresentLayer(GUI_Layer *layer){
+    if(!layer){
+        return 1;
+    }
+
+    if(!layer->count){
+        return 2;
+    }
+
+    fprintf(stdout, "[i] fuck!\n");
+
+    GUI_Element *_el = layer->elements;
+    while(_el){ 
+        if(GUI_PresentElement(_el)){
+            return 3;
+        }
+        _el = _el->next;
+    }
+    return 0;
+}
+
 
 #if 0
 
