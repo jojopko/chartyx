@@ -76,8 +76,6 @@ int GUI_PresentLayer(GUI_Layer *layer){
         return 2;
     }
 
-    fprintf(stdout, "[i] fuck!\n");
-
     GUI_Element *_el = layer->elements;
     while(_el){ 
         if(GUI_PresentElement(_el)){
@@ -88,6 +86,24 @@ int GUI_PresentLayer(GUI_Layer *layer){
     return 0;
 }
 
+GUI_Element *GUI_GetElement(int lid, GUI_Layer *layer){
+    if(!layer){
+        return NULL;
+    }
+
+    GUI_Element *element = layer->elements;
+    while(element){
+        if(element->lid == lid){
+            break;
+        }
+        element = element->next;
+    }
+    if(element->lid != lid){
+        return NULL;
+    }
+
+    return element;
+}
 
 #if 0
 

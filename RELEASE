@@ -2,11 +2,11 @@
 # chartix release list
 
 --------------------------------------------------------------------------------
-@ gui_lib (v0.04)
-~ Layers don't work. In the future they will definitely be.
+@ gui_lib (v0.05)
+~ Add Layers.
 
-> Delete Layers;
-> Fix `stack overflow`. Possibly (=_=)
+> Add layers;
+> Added several functions to make work easier;
 
 --------------------------------------------------------------------------------
 @ game (nil)

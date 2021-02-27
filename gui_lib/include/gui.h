@@ -8,6 +8,8 @@
 
 extern SDL_Renderer *gui_render;
 
+extern int GUI_SetGUIRender(SDL_Renderer *render);
 
+extern SDL_Surface *GUI_LoadImage(const char *file);
 
 #endif

@@ -25,10 +25,8 @@ int main(){
     SDL_SetRenderDrawColor(gui_render, 255, 255, 255, 255);
     SDL_RenderPresent(gui_render);
 
-    SDL_Surface *img = IMG_Load("/home/jojopko/Documents/chartyx/gui_lib/tests/"
-                                "assets_for_test/test1-container.png\0");
-    SDL_Surface *img2= IMG_Load("/home/jojopko/Documents/chartyx/gui_lib/tests/"
-                                "assets_for_test/test1-container2.jpg\0");
+    SDL_Surface *img = GUI_LoadImage("../tests/assets_for_test/test1-container.png\0");
+    SDL_Surface *img2= GUI_LoadImage("../tests/assets_for_test/test1-container2.jpg\0");
     el1 = GUI_CreateContainer(0b00000001, b1, tex1);
 
     GUI_UpdateElementTexture(el1, img);
@@ -102,10 +100,10 @@ int main(){
         fprintf(stdout, "[!] layer: push fail!\n");
     }
 
-    fprintf(stdout, "[i] layer: element: lid=%d\n", layer->elements->next->lid);
+    fprintf(stdout, "[i] layer: element: lid=%d\n", layer->elements->next->next->lid);
 
     if(GUI_PresentLayer(layer)){
-        fprintf(stdout, "[!] layer: present fail! {%d}\n", GUI_PresentLayer(layer));
+        fprintf(stdout, "[!] layer: present fail!\n");
     }
     
     SDL_RenderPresent(gui_render);

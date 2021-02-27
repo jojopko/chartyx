@@ -145,15 +145,7 @@ int GUI_HasState(GUI_Element *e, int state){
         return 0;
     }
 
-    /* FIXME: AND method is better */
-    /* Defining state using XOR . Example: 
-    states = 0b00010001 (17); 
-    state =  0b00001000 (8);
-    
-    states > (states ^ state)  # 17 > 25   - false.
-    */
-
-    if(states > (states ^ state)){
+    if(states & state){
         return 1;
     }
     else{

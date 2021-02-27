@@ -1,8 +1,6 @@
 #ifndef _GUI_LAYER_H_
 #define _GUI_LAYER_H_
 
-// FIXME: all
-
 #include "types.h"
 #include "element.h"
 
@@ -24,8 +22,10 @@ extern GUI_Layer *GUI_CreateLayer(int states);
 
 extern int GUI_PushElement(GUI_Element *el, GUI_Layer *layer);
 
-extern int GUI_RemoveElementTo(int lid, GUI_Layer *layer);
+extern GUI_Element *GUI_GetElement(int lid, GUI_Layer *layer);
 
 extern int GUI_PresentLayer(GUI_Layer *layer);
+
+extern int GUI_RemoveElement(int lid, GUI_Layer *layer);
 
 #endif
